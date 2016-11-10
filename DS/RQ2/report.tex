@@ -1,0 +1,79 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+
+\titleformat{\chapter}[block]
+  {\normalfont\huge\bfseries}{\thechapter.}{1em}{\Huge}
+\titlespacing*{\chapter}{0pt}{-19pt}{0pt}
+
+\begin{document}
+
+\begin{titlepage}
+	\centering
+	{\scshape\LARGE Innopolis University \par}
+	\vspace{1cm}
+	{\huge\bfseries Distributed Systems\par}
+	{\huge\bfseries Reading Questions 2\par}
+	\vspace{2cm}
+	{\Large\itshape Timur Samigullin\par}
+	\vfill
+	supervised by\par
+	Azat Safin
+	\vfill
+	{\large \today\par}
+\end{titlepage}
+
+\textbf{Question 1:} According to [DS], there are three types of system architectures: centralized, decentralized and hybrid. And according to [TAX] there are five of them. How do you think to which type of architecture by [DS] should we correspond the
+types that were proposed in the [TAX] and why?
+\bigbreak
+\textbf{Question 2:} What is the difference between a process and a thread?
+
+The processes and threads are independent sequences of execution, the typical difference is that threads run in a shared memory space, while processes run in separate memory spaces.
+
+A process has a self contained execution environment that means it has a complete, private set of basic run time resources purticularly each process has its own memory space. Threads exist within a process and every process has at least one thread.
+
+Each process provides the resources needed to execute a program. Each process is started with a single thread, known as the primary thread. A process can have multiple threads in addition to the primary thread.
+
+An important property of threads is that they can provide a convenient means of allowing blocking system calls without blocking the entire process in which the thread is running.
+\bigbreak
+\textbf{Question 3:} What is an asynchronous (non-blocking) I/O operation?
+
+In computer science, asynchronous I/O, or "Non-sequential I/O" is a form of input/output processing that permits other processing to continue before the transmission has finished. \cite{wiki_asynchronous} 
+Invocation of a blocking system call will immediately block the entire process to which the thread belongs, and thus also all the other threads in that process. However, instead of blocking entire process, the thread schedules an asynchronous operation, it will be interrupted later by operating system.
+\bigbreak
+\textbf{Question 4:} What is an asynchronous (non-blocking) I/O operation?
+Using threads in single-core CPU is an illusion. As there is only a single CPU, only an instruction from a single thread or process will be executed at a time. By rapidly switching between threads and processes, the illusion of parallelism is created.
+
+\bigbreak
+\textbf{Question 5:} VM images such as AMIs can be quite big. How does this impact cloud providers that have many customers creating many different virtual machines all the time?
+
+Such level of service can be achieved by subdividing of resources and well-considered scalable architecture. Amazon provide separated services for different request: storages, networking, memory, processor. Also, Amazon has huge amount of servers, which are connected with each other by networks.
+
+\textbf{Question 6:} Are Web servers stateless or stateful?
+
+It merely responds to incoming HTTP requests, which can be either for uploading a le to the server or (most often) for fetching a le. When the request has been processed, the Web server forgets the client completely. Likewise, the collection of files that a Web server manages (possibly in cooperation with a le server), can be changed without clients having to be informed.
+
+\textbf{Question 7:} What is the difference in request dispatching for local-area and wide-area clusters? At what point will we need a redirection policy?
+
+The main difference between local-area and wide-area network is locality and potentially remoteness of servers, so it can provide latency for requests. For wide-area clusters switch need to select closest server to client, to provide low latency for requests. In wide-area clusters, once a server has been selected, the dispatcher will have to inform the client by redirection mechanisms.
+
+\textbf{Question 8:} Wide-area redirection requires a method for measuring the distance between two IP addresses. Think of two different methods and discuss pros and cons.
+
+To provide low latency we should measure the abstract distance between 2 ip addresses. It can be, for example: ping latency, the number of hopes (routers) between 2 ip addresses, the number of autonomous systems. All this parameters can be checked during redirection mechanism process. The main advantage of this mechanisms is simplicity, but we need some time to calculate this parameters. If we use the number of autonomous systems, we just can send request to BGP router and it will response how many hopes packet should go till necessary ip address.
+\bigbreak
+\textbf{Question 9:} What problems will you need to solve to allow live migration of virtual machines between different wide-area clusters?
+\bigbreak
+\textbf{Question 10:} According to Fuggetta (Note 3.9) there are three segments in a process. Which segment do you think is typically more difficult to migrate?
+\end{document}
+
+
+
+
